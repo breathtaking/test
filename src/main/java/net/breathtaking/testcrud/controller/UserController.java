@@ -6,10 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 public class UserController {
@@ -30,7 +29,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/users/add", method = RequestMethod.POST)
-    public String addBook(@ModelAttribute("user") User user){
+    public String addUser(@ModelAttribute("user") User user){
         if(user.getId() == 0){
             this.userService.addUser(user);
         }else {
@@ -56,15 +55,17 @@ public class UserController {
     }
 
     @RequestMapping("userdata/{id}")
-    public String bookData(@PathVariable("id") int id, Model model){
+    public String userData(@PathVariable("id") int id, Model model){
         model.addAttribute("user", this.userService.getUserById(id));
 
         return "userdata";
     }
+
+    @RequestMapping(value = "/users/searchuser" , method = RequestMethod.POST)
+    public String searchUsers(@RequestParam("query") String query, Model model) {
+        List<User> userListByQuery = userService.listUsersByQuery(query);
+        model.addAttribute("userListByQuery", userListByQuery);
+        return "search";
+    }
 }
 
-
-
-/*
-com.sun.proxy.$Proxy25.listUsers(Unknown Source)
- */

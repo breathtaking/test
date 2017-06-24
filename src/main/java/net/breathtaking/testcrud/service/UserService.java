@@ -14,4 +14,6 @@ public interface UserService {
     public User getUserById(int id);
 
     public List<User> listUsers();
+
+    public List<User> listUsersByQuery(String query);
 }

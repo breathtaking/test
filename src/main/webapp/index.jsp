@@ -6,8 +6,6 @@
 </head>
 <body>
 <h3>Javarush Test CRUD</h3>
-<br/>
 <a href="<c:url value="/users"/>" target="_blank">User List</a>
-<br/>
 </body>
 </html>

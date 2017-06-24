@@ -43,9 +43,6 @@
             background-color: #f0f0f0;
         }
 
-        .tg .tg-4eph {
-            background-color: #f9f9f9
-        }
     </style>
 
 
@@ -53,12 +50,15 @@
 </head>
 <body>
 <a href="../../index.jsp">Back to main menu</a>
-
 <br/>
 <br/>
 
 <h1>User List</h1>
-
+<c:if test="${empty listUsers}">
+    There are no Users yet
+    <br/>
+    Add your first User to DB
+</c:if>
 <c:if test="${!empty listUsers}">
     <table class="tg">
         <tr>
@@ -157,10 +157,24 @@
                     <input type="submit"
                            value="<spring:message text="Add User"/>"/>
                 </c:if>
+
             </td>
         </tr>
 
     </table>
 </form:form>
+
+
+<h1>Search a User</h1>
+
+<form method="post" action="/users/searchuser">
+    <label for="query">User's Name:</label>
+         <input type="text" id="query" name="query" placeholder="type name"/>
+                <br/>
+                  <br/>
+                      <input type="submit" value="search"/>
+</form>
+
+
 </body>
 </html>
